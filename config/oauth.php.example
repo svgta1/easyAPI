@@ -18,9 +18,9 @@ $config = [
   ],
   */
   'mappings' => [
-    'myApyClients' => [
+    'myApiClients' => [
       'description' => 'Totp clients backend',
-      'class' => '\\Svgta\\EasyApiTotp\\backend\\mongodb\\totpclients', //Backend class
+      'class' => '\\Svgta\\myApiClients\\backend\\mongodb\\totpclients', //Backend class
       'target_id' => '', //target unique user id. Exampel : user_id
       'mapping' => [
         [
