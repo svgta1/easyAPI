@@ -1,0 +1,19 @@
+<?php
+$config = [
+  "uri" => "mongodb://localhost:27017",
+  "db" => "ApiTotp",
+  "options" => [
+    //"replicaSet" => "rsServer",
+    //"username" => "totpUser",
+    //"password" => "test",
+    //"authMechanism" => "MONGODB-X509",
+    //"authSource" => '$external',
+    //"authSource" => "admin",
+    //"tls" => true,
+    //"tlsAllowInvalidCertificates" => true,
+    //"tlsAllowInvalidHostnames" => true,
+    //"tlsCAFile" => '',
+    //"tlsCertificateKeyFile" => '',
+  ],
+  "driver" => [],
+];

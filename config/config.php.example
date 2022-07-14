@@ -1,0 +1,34 @@
+<?php
+
+$config = [
+    "appName" => "My API", //API name
+    "basePath" => "/api", //basePath
+    "apiVersion" => "v1", //api version
+    "token_lifetime" => 3600, //JWT token life time after authentication. Must not be greater than 1 hour
+    "jwk_lifetime" => 86400, //JWK lifetime before renew one. Used to verify sign. Must not be greater than a couple of days.
+    "pagination_default" => [ //Pagination for list backend
+        "limit" => 10,
+        "max_limit" => 1000,
+        "start" => 1
+    ],
+    "scope_default" => [ //Default scopes set when creating a new user
+//the scope admin_super must be set only for super_admin
+//the scope authorization must be set to allow to authenticate
+//the scope multi_session must be set if multi session is allowed for the type of user
+        "super_admin" => "admin_super authorization",
+        "admin" => "admin_clients admin_read multi_session authorization",
+        "client" => "client_totp authorization"
+    ],
+    "verify_JWT" => [ //Claims of the JWT to verify
+        "exp" => true, //expired JWT
+        "nbf" => true, //not before use
+        "iss" => true, //issuer : must be the same as appName
+        "client_ip" => true, //client IP when the JWT has been created and actual IP
+        "client_ua" => true //client User Agent when the JWT has been created and actual User Agent
+    ],
+    "multi_session" => [
+      'allowed' => false, //true or false. If false, non multi session is allowed for a user unless he have the scope multi_session set
+      'delete_old' => true, //true or false. If false, new sessions are not authorized. If true, other sessions are deleted
+    ],
+    "log_retention" => 86400 //time before purge the old logs in the database.
+];

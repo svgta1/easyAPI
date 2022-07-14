@@ -1,0 +1,14 @@
+<?php
+
+$config = [
+  'secureKey' => [
+    'keySize' => 1024, //256, 512, 1024, 2048...
+    'alg' => 'A256KW', //A256KW only supported
+    'use' => 'enc', //enc needed -> use to encrypt some datas
+  ],
+  'superAdmin_info' => [
+    'given_name' => "to_set", //required
+    'family_name' => "to_set", //required
+    'email' => "to_set", //required
+  ]
+];

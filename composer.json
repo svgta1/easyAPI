@@ -1,0 +1,40 @@
+{
+    "name": "svgta/easyapi",
+    "type": "library",
+    "license": "MIT",
+    "description": "A PHP library to create API easly",
+    "keywords": ["api", "webservice", "security", "JWT", "JWS", "JWK", "JWE"],
+    "require": {
+        "zircote/swagger-php": "^4.4",
+        "vlucas/phpdotenv": "^5.4",
+        "web-token/jwt-key-mgmt": "^3.0",
+        "web-token/jwt-encryption": "^3.0",
+        "web-token/jwt-signature": "^3.0",
+        "web-token/jwt-checker": "^3.0",
+        "web-token/jwt-core": "^3.0",
+        "web-token/jwt-signature-algorithm-hmac": "^3.0",
+        "web-token/jwt-signature-algorithm-ecdsa": "^3.0",
+        "web-token/jwt-signature-algorithm-rsa": "^3.0",
+        "web-token/jwt-signature-algorithm-eddsa": "^3.0",
+        "web-token/jwt-encryption-algorithm-aeskw": "^3.0",
+        "web-token/jwt-encryption-algorithm-aesgcmkw": "^3.0",
+        "web-token/jwt-encryption-algorithm-rsa": "^3.0",
+        "web-token/jwt-encryption-algorithm-aesgcm": "^3.0",
+        "web-token/jwt-encryption-algorithm-aescbc": "^3.0",
+        "ext-gmp": "*",
+        "php": "^8.0",
+        "mongodb/mongodb": "^1.11",
+        "guzzlehttp/guzzle": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Svgta\\EasyApi\\": "lib/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Svgta",
+            "email": "svgta@live.com"
+        }
+    ]
+}

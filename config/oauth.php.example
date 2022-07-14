@@ -1,0 +1,56 @@
+<?php
+
+$config = [
+  'provider_name' => 'Google',
+  'type' => 'openIdConnect', //openIdConnect OR oauth2
+  'access' => [  //for openIdConnect
+    'url_config' => 'https://accounts.google.com/.well-known/openid-configuration',
+  ],
+/*
+  'provider_name' => 'Github',
+  'type' => 'oauth2', //openIdConnect OR oauth2
+  'access' => [  //for oauth2
+    'flow' => 'authorizationCode ', //authorizationCode implicit password clientCredentials
+    'authorizationUrl' => 'https://github.com/login/oauth/authorize',
+    'tokenUrl' => 'https://github.com/login/oauth/access_token',
+    'userInfoUrl' => 'https://api.github.com/user',
+    'scopes' => 'user:read',
+  ],
+  */
+  'mappings' => [
+    'myApyClients' => [
+      'description' => 'Totp clients backend',
+      'class' => '\\Svgta\\EasyApiTotp\\backend\\mongodb\\totpclients', //Backend class
+      'target_id' => '', //target unique user id. Exampel : user_id
+      'mapping' => [
+        [
+          'provider_claim' => 'email',
+          'api_att' => 'contact_email',
+        ],
+      ],
+    ],
+    'admin' => [
+      'description' => 'Administrators backend',
+      'class' => '\\Svgta\\EasyApi\\backend\\mongodb\\admin', //Backend class
+      'target_id' => '', //target unique user id. Exampel : admin_id
+      'mapping' => [
+        [
+          'provider_claim' => 'email',
+          'api_att' => 'email',
+        ],
+        /*
+        [
+          'provider_claim' => 'given_name',
+          'api_att' => 'given_name',
+        ],
+        [
+          'provider_claim' => 'family_name',
+          'api_att' => 'family_name',
+        ],
+        */
+      ],
+    ],
+  ],
+  'GuzzleHttp_params' => [ //set proxy and others things. See https://docs.guzzlephp.org/
+  ],
+];

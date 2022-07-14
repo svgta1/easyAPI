@@ -1,0 +1,208 @@
+<?php
+namespace Svgta\docAPI;
+use OpenApi\Annotations as OA;
+use Svgta\EasyApi\utils\conf;
+
+$ar = [
+  'api_name' => conf::getConfKey('DOCAPI_CONF', 'api_name'),
+  'doc_version' => conf::getConfKey('DOCAPI_CONF', 'doc_version'),
+  'api_path' => conf::getConfKey('CONF_GENERAL', 'basePath') . '/' . conf::getConfKey('CONF_GENERAL', 'apiVersion'),
+];
+
+define("API_NAME", $ar['api_name']);
+define("DOC_VERSION", $ar['doc_version']);
+define("API_PATH", $ar['api_path']);
+/**
+ * @OA\Info(
+ *  description="This API is to generate TOTP code and verify the code generated with your authenticator. <br />To authenticate as a client, you need to use the Authentication API. To have a client account, you need to contact an administrator.",
+ *  title=API_NAME,
+ *  version=DOC_VERSION
+ * )
+ *
+ * @OA\Server(url=API_PATH)
+ *
+ * @OA\SecurityScheme(
+ *     securityScheme="JWT_bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     description="JWT result after authenticate with the authentication API"
+ * )
+ *
+ * @OA\Tag(
+ *    name="Totp Client",
+ *    description="Client API Management. Client users must be created with the administration API"
+ * )
+ *
+ * @OA\Tag(
+ *    name="Totp",
+ *    description="api TOTP"
+ * )
+ *
+ * @OA\Schema(
+ *   schema="authDefaultKo",
+ *   description="Bad request",
+ *   @OA\Property(type="string", property="msg", description="error message")
+ * )
+ *
+ * @OA\Schema(
+ *   schema="clientInfo",
+ *   description="Client parameters",
+ *   @OA\Property(type="boolean", property="Success", description="true ou false"),
+ *   @OA\Property(
+ *     type="string",
+ *     property="client_id",
+ *     description="client_id -> to save",
+ *     example="id1",
+ *   ),
+ *   @OA\Property(
+ *     type="string",
+ *     property="client_secret",
+ *     description="client_secret -> to save",
+ *   ),
+ *   @OA\Property(
+ *     type="string",
+ *     property="iss",
+ *     description="Issuer name",
+ *     example="https://monAppliCliente",
+ *   ),
+ *   @OA\Property(
+ *     type="object",
+ *     property="totp_properties",
+ *     description="Configuration TOTP",
+ *     @OA\Property(
+ *       type="integer",
+ *       description="length of TOTP code (6 ou 8)",
+ *       property="code_len",
+ *       default=6,
+ *       example=6,
+ *     ),
+ *     @OA\Property(
+ *       type="string",
+ *       property="alg",
+ *       description="Alg to use (sha1, sha256, sha512)",
+ *       default="sha1",
+ *       example="sha1",
+ *     ),
+ *     @OA\Property(
+ *       type="integer",
+ *       property="exp_time",
+ *       description="Experied time",
+ *       default="30",
+ *       example="30",
+ *     ),
+ *   ),
+ *    @OA\Property(
+ *      type="string",
+ *      nullable=true,
+ *      property="img_link",
+ *      description="link of the image of the issuer",
+ *      default=null,
+ *      example="https://monAppliCliente/logo.png",
+ *    ),
+ *    @OA\Property(
+ *      type="string",
+ *      nullable=true,
+ *      property="scope",
+ *      description="Scope",
+ *      default=null,
+ *      example="https://monAppliCliente/logo.png",
+ *    ),
+ * )
+ *
+ * @OA\Schema(
+ *   schema="clientUpdate",
+ *   title="Mise à jour des paramètres",
+ *   required={"client_id"},
+ *   @OA\Property(
+ *     type="string",
+ *     property="client_id",
+ *     description="Identité du client",
+ *     example="id1",
+ *   ),
+ *   @OA\Property(
+ *     type="object",
+ *     property="update",
+ *     description="Elements à mettre à jour",
+ *     @OA\Property(
+ *       type="string",
+ *       property="iss",
+ *       description="Issuer : nom de l'application ou url liée au client",
+ *     ),
+ *     @OA\Property(
+ *       type="integer",
+ *       property="totp_code_len",
+ *       description="longueur du code (6 ou 8). 6 Pour une meilleure compatibilité",
+ *       default=6,
+ *     ),
+ *     @OA\Property(
+ *       type="integer",
+ *       property="totp_exp",
+ *       description="Temps avant expiration du code en seconde (30 pour une meilleure compatibilité)",
+ *       default=30,
+ *     ),
+ *     @OA\Property(
+ *       type="string",
+ *       property="totp_alg",
+ *       description="Algorithme (sha1, sha256, sha512). Sah1 pour une meilleure compatibilité",
+ *       default="sha1"
+ *     ),
+ *     @OA\Property(
+ *       type="boolean",
+ *       property="api_save",
+ *       description="Sauvegarder dans la base de donnée de l'API (sinon, doit être fait par le client)",
+ *       default=false,
+ *     ),
+ *     @OA\Property(
+ *       type="string",
+ *       nullable=true,
+ *       property="img_link",
+ *       description="Logo du client, est nullable",
+ *       default=null,
+ *     ),
+ *   ),
+ * )
+ *
+ * @OA\Schema(
+ *   schema="clientCreate",
+ *   title="Création d'un client",
+ *   required={"iss", "contact_email"},
+ *   @OA\Property(
+ *      type="string",
+ *      property="iss",
+ *      description="Issuer : nom de l'application ou url liée au client",
+ *   ),
+ *   @OA\Property(
+ *      type="string",
+ *      property="contact_email",
+ *      description="Issuer : nom de l'application ou url liée au client",
+ *   ),
+ *   @OA\Property(
+ *      type="integer",
+ *      property="totp_code_len",
+ *      description="longueur du code (6 ou 8). 6 Pour une meilleure compatibilité",
+ *      default=6,
+ *   ),
+ *   @OA\Property(
+ *      type="integer",
+ *      property="totp_exp",
+ *      description="Temps avant expiration du code en seconde (30 pour une meilleure compatibilité)",
+ *      default=30,
+ *   ),
+ *   @OA\Property(
+ *      type="string",
+ *      property="totp_alg",
+ *      description="Algorithme (sha1, sha256, sha512). Sah1 pour une meilleure compatibilité",
+ *      default="sha1",
+ *   ),
+ *   @OA\Property(
+ *      type="string",
+ *      nullable=true,
+ *      property="img_link",
+ *      description="Logo du client, est nullable",
+ *      default=null,
+ *   ),
+ * )
+ */
+
+class apiInfo{}
