@@ -1,7 +1,7 @@
 <?php
 require dirname(__FILE__, 2) . '/vendor/autoload.php';
 require dirname(__FILE__, 1) . '/class/initClass.php';
-use Svgta\initAPI\secureKey;
+require dirname(__FILE__, 1) . '/class/secureKey.php';
 use Svgta\EasyApi\utils\conf;
 
 echo PHP_EOL . "\033[0m";
