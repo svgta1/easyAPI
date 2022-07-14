@@ -18,6 +18,7 @@ $config = [
   ],
   */
   'mappings' => [
+    /* Example
     'myApiClients' => [
       'description' => 'Totp clients backend',
       'class' => '\\Svgta\\myApiClients\\backend\\mongodb\\totpclients', //Backend class
@@ -29,6 +30,7 @@ $config = [
         ],
       ],
     ],
+    */
     'admin' => [
       'description' => 'Administrators backend',
       'class' => '\\Svgta\\EasyApi\\backend\\mongodb\\admin', //Backend class
