@@ -45,7 +45,7 @@ class init{
     $this->namespace = array_key_first($psr4);
     $this->psr4Dir =  $this->baseDir . '/' . $psr4[$this->namespace];
 
-    $this->libDir = $this->baseDir . '/vendor/Svgta/EasyApi';
+    $this->libDir = $this->baseDir . mb_strtolower('/vendor/Svgta/EasyApi');
     $this->composer = $composer;
   }
 
