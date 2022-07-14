@@ -187,8 +187,24 @@ class init{
     use Svgta\\EasyApi\\backend\\Exception;
 
     abstract class $absCtrl extends svgtaCtrlAbstract{
+      protected \$parent_backend = null;
+      protected \$backend = null;
+
       public function __construct(string \$backend = null, array \$request = [], ?string \$scopes = null){
+        \$this->parent_backend = \$parent_backend;
+        \$this->backend = \$backend;
         parent::__construct(\$backend , \$request, \$scopes);
+      }
+
+      protected function loadBackend(string \$target){
+        if(isset(self::\$cacheBackend[\$target]))
+          return self::\$cacheBackend[\$target];
+        if(class_exists(\$this->parent_backend . \$target))
+          \$str = \$this->parent_backend . \$target;
+        else
+          \$str = \$this->backend . \$target;
+        self::\$cacheBackend[\$target] = new \$str();
+        return self::\$cacheBackend[\$target];
       }
     }
     CONTROLLER;
