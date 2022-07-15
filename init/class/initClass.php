@@ -234,10 +234,10 @@ class init{
         parent::__construct();
         \$dirVersion = null;
         if(\$this->route['dir'])
-          \$dirVersion = \$this->route['dir'] . '\\';
-        \$class = __namespace__ . '\\controller\\' . \$dirVersion . \$this->route['class'];
+          \$dirVersion = \$this->route['dir'] . '\\\';
+        \$class = __namespace__ . '\\\controller\\\' . \$dirVersion . \$this->route['class'];
         \$dbType = \$_ENV['DB_TYPE'];
-        \$backend = __namespace__ . '\\backend\\' . \$dbType . '\\';
+        \$backend = __namespace__ . '\\\backend\\\' . \$dbType . '\\\';
         \$c = new \$class(\$this->parent_backend, \$backend, utils::getRequest(), \$this->route['scope']);
         \$method = \$this->route['method'];
         \$arg = \$this->route['arg'];
